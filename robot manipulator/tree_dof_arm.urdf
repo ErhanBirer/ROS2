@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<robot name="four_dof_arm">
+
+  <material name="green"><color rgba="0.0 0.8 0.0 1.0"/></material>
+  <material name="orange"><color rgba="1.0 0.5 0.0 1.0"/></material>
+  <material name="yellow"><color rgba="1.0 1.0 0.0 1.0"/></material>
+  <material name="blue"><color rgba="0.0 0.0 0.8 1.0"/></material>
+  <material name="black"><color rgba="0.1 0.1 0.1 1.0"/></material>
+  <material name="gray"><color rgba="0.5 0.5 0.5 1.0"/></material>
+
+  <link name="world"/>
+  
+  <joint name="world_to_base" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0.05"/>
+  </joint>
+
+  <link name="base_link">
+    <visual>
+      <geometry><box size="0.25 0.25 0.1"/></geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry><box size="0.25 0.25 0.1"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <inertia ixx="0.00302" ixy="0" ixz="0" iyy="0.00302" iyz="0" izz="0.00521"/>
+    </inertial>
+  </link>
+
+  <link name="j1_sphere">
+    <visual>
+      <geometry><sphere radius="0.09"/></geometry>
+      <material name="gray"/>
+    </visual>
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="0.000032" ixy="0" ixz="0" iyy="0.000032" iyz="0" izz="0.000032"/>
+    </inertial>
+  </link>
+
+  <joint name="joint1" type="revolute">
+    <parent link="base_link"/>
+    <child link="j1_sphere"/>
+    <origin xyz="0 0 0.05"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.14" upper="3.14" effort="1000" velocity="10000000.0"/>
+    <dynamics damping="0.1" friction="0.0"/>
+  </joint>
+
+  <link name="link1">
+    <visual>
+      <origin xyz="0 0 0.05"/>
+      <geometry><cylinder length="0.1" radius="0.07"/></geometry>
+      <material name="green"/>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0.05"/>
+      <mass value="0.45"/>
+      <inertia ixx="0.00092" ixy="0" ixz="0" iyy="0.00092" iyz="0" izz="0.00110"/>
+    </inertial>
+  </link>
+
+  <joint name="j1_to_l1" type="fixed">
+    <parent link="j1_sphere"/>
+    <child link="link1"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <link name="j2_sphere">
+    <visual>
+      <geometry><sphere radius="0.06"/></geometry>
+      <material name="gray"/>
+    </visual>
+    <inertial><mass value="0.01"/><inertia ixx="0.000014" ixy="0" ixz="0" iyy="0.000014" iyz="0" izz="0.000014"/></inertial>
+  </link>
+
+  <joint name="joint2" type="revolute">
+    <parent link="link1"/>
+    <child link="j2_sphere"/>
+    <origin xyz="0 0 0.1"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-3.14" upper="3.14" effort="1000" velocity="10000000.0"/>
+    <dynamics damping="0.1" friction="0.0"/>
+  </joint>
+
+  <link name="link2">
+    <visual>
+      <origin xyz="0 0 0.2"/> 
+      <geometry><cylinder length="0.4" radius="0.05"/></geometry>
+      <material name="orange"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.2"/>
+      <geometry><cylinder length="0.4" radius="0.05"/></geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.2"/>
+      <mass value="0.45"/>
+      <inertia ixx="0.00628" ixy="0" ixz="0" iyy="0.00628" iyz="0" izz="0.00056"/>
+    </inertial>
+  </link>
+
+  <joint name="j2_to_l2" type="fixed">
+    <parent link="j2_sphere"/>
+    <child link="link2"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <link name="j3_sphere">
+    <visual>
+      <geometry><sphere radius="0.05"/></geometry>
+      <material name="gray"/>
+    </visual>
+    <inertial><mass value="0.01"/><inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/></inertial>
+  </link>
+
+  <joint name="joint3" type="revolute">
+    <parent link="link2"/>
+    <child link="j3_sphere"/>
+    <origin xyz="0 0 0.4"/> 
+    <axis xyz="0 1 0"/>
+    <limit lower="-3.14" upper="3.14" effort="1000" velocity="10000000.0"/>
+    <dynamics damping="0.1" friction="0.0"/>
+  </joint>
+
+  <link name="link3">
+    <visual>
+      <origin xyz="0 0 0.175"/> 
+      <geometry><cylinder length="0.35" radius="0.04"/></geometry>
+      <material name="yellow"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.175"/>
+      <geometry><cylinder length="0.35" radius="0.04"/></geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0.175"/>
+      <mass value="0.45"/>
+      <inertia ixx="0.00477" ixy="0" ixz="0" iyy="0.00477" iyz="0" izz="0.00036"/>
+    </inertial>
+  </link>
+
+  <joint name="j3_to_l3" type="fixed">
+    <parent link="j3_sphere"/>
+    <child link="link3"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <link name="j4_sphere">
+    <visual>
+      <geometry><sphere radius="0.04"/></geometry>
+      <material name="gray"/>
+    </visual>
+    <inertial><mass value="0.01"/><inertia ixx="0.000006" ixy="0" ixz="0" iyy="0.000006" iyz="0" izz="0.000006"/></inertial>
+  </link>
+
+  <joint name="joint4" type="revolute">
+    <parent link="link3"/>
+    <child link="j4_sphere"/>
+    <origin xyz="0 0 0.35"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.14" upper="3.14" effort="1000" velocity="200000.0"/>
+    <dynamics damping="0.1" friction="0.0"/>
+  </joint>
+
+  <link name="link4">
+    <visual>
+      <origin xyz="0 0 0.05"/>
+      <geometry><box size="0.06 0.06 0.1"/></geometry>
+      <material name="blue"/>
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0.05"/>
+      <mass value="0.45"/>
+      <inertia ixx="0.00051" ixy="0" ixz="0" iyy="0.00051" iyz="0" izz="0.00027"/>
+    </inertial>
+  </link>
+
+  <joint name="j4_to_l4" type="fixed">
+    <parent link="j4_sphere"/>
+    <child link="link4"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <gazebo>
+    <plugin filename="libgz-sim-joint-state-publisher-system.so" name="gz::sim::systems::JointStatePublisher">
+      <topic>/model/four_dof_arm/joint_state</topic>
+    </plugin>
+    <plugin filename="libgz-sim-apply-joint-force-system.so" name="gz::sim::systems::ApplyJointForce"><joint_name>joint1</joint_name><topic>/model/four_dof_arm/joint/joint1/cmd_force</topic></plugin>
+    <plugin filename="libgz-sim-apply-joint-force-system.so" name="gz::sim::systems::ApplyJointForce"><joint_name>joint2</joint_name><topic>/model/four_dof_arm/joint/joint2/cmd_force</topic></plugin>
+    <plugin filename="libgz-sim-apply-joint-force-system.so" name="gz::sim::systems::ApplyJointForce"><joint_name>joint3</joint_name><topic>/model/four_dof_arm/joint/joint3/cmd_force</topic></plugin>
+    <plugin filename="libgz-sim-apply-joint-force-system.so" name="gz::sim::systems::ApplyJointForce"><joint_name>joint4</joint_name><topic>/model/four_dof_arm/joint/joint4/cmd_force</topic></plugin>
+  </gazebo>
+
+</robot>
