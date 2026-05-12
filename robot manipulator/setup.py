@@ -37,7 +37,13 @@ setup(
         		'robust_gravity = first_package.robust_gravity:main',
         		'adaptive_controller = first_package.adaptive_controller:main',
         		'FLNN_Controller = first_package.FLNN_Controller:main',
+        		'MLP_Controller = first_package.MLP_Controller:main',
+        		'MLP_NonidealCase_Controller = first_package.MLP_NonidealCase_Controller:main',
+        		'MLP_Nonideal_Hebbian_Case_Controller = first_package.MLP_Nonideal_Hebbian_Case_Controller:main',
 
         ],
     },
 )
+
+
+
